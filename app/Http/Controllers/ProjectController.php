@@ -86,12 +86,19 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validator = $request->validate([
+            'ProjectTitle' => 'required',
+            'ProjectDescription'=> 'required'
+        ]);
+
         Project::where('id', $request->id)->update([
             'ProjectTitle' => $request->ProjectTitle,
             'ProjectDescription' => $request->ProjectDescription
         ]);
+
+
         
-        return redirect('projects');
+        return redirect('projects')->with('successUpdate','Data updated successfully');
     }
 
     /**
@@ -104,6 +111,6 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
         $project->delete();
-        return redirect('projects');
+        return redirect('projects')->with('successDelete','Data deleted successfully');
     }
 }

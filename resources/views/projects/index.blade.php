@@ -3,6 +3,16 @@
 @section('content')
     <div class='main'>
         <div class='container'>
+            @if(Session::has('successUpdate'))
+                <div class="alert alert-success">
+                    {{ Session::get('successUpdate') }}
+                </div>
+            @elseif(Session::has('successDelete'))
+                <div class="alert alert-success">
+                    {{ Session::get('successDelete') }}
+                </div>
+
+            @endif
             <div class='row'>
                 <div class='col-12'>
                     <h1 class='text-center'>My Projects</h1>

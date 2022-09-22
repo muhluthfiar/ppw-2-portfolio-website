@@ -18,7 +18,7 @@
                     @method('DELETE')
                     {{ csrf_field() }}
                     <input type="hidden" name="id" value="{{$project->id}}">
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="submit" onClick="return confirm('Hapus portfolio?')" class="btn btn-danger">Delete</button>
                 </form>
             </div>
         </div>
