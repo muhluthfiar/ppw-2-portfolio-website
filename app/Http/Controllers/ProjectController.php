@@ -70,7 +70,11 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = array(
+            'id' => 'projects',
+            'project' => Project::find($id)
+        );
+        return view('projects.edit')->with($data);
     }
 
     /**
@@ -82,7 +86,12 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Project::where('id', $request->id)->update([
+            'ProjectTitle' => $request->ProjectTitle,
+            'ProjectDescription' => $request->ProjectDescription
+        ]);
+        
+        return redirect('projects');
     }
 
     /**
@@ -93,6 +102,8 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $project = Project::find($id);
+        $project->delete();
+        return redirect('projects');
     }
 }
