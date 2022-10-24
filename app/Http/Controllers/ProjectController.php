@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ["except" => ["index"]]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -78,7 +82,7 @@ class ProjectController extends Controller
         );
         return view('projects.edit')->with($data);
     }
-
+    
     /**
      * Update the specified resource in storage.
      *
@@ -115,4 +119,6 @@ class ProjectController extends Controller
         $project->delete();
         return redirect('projects')->with('successDelete','Data deleted successfully');
     }
+
+
 }
