@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class ProjectController extends Controller
 {
@@ -46,10 +48,29 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'ProjectTitle' => 'required|max:255',
+            'ProjectDescription' => 'required',
+            'picture' => 'image|nullable|max:1999'
+        ]);
+
+        if($request->hasFile('picture')){
+            $filenameWithExt = $request->file('picture')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('picture')->getClientOriginalExtension();
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            $path = $request->file('picture')->storeAs('public/ProjectImages', $fileNameToStore);
+        } else {
+            $fileNameToStore = 'noimage.jpg';
+        }
+
         $project = new Project;
         $project->ProjectTitle = $request->input('ProjectTitle');
         $project->ProjectDescription = $request->input('ProjectDescription');
+        $project->picture = $fileNameToStore;
         $project->save();
+
+        return redirect('projects')->with('successCreate','Data added successfully');
     }
 
     /**
@@ -92,18 +113,28 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = $request->validate([
-            'ProjectTitle' => 'required',
-            'ProjectDescription'=> 'required'
+        $this->validate($request, [
+            'ProjectTitle' => 'required|max:255',
+            'ProjectDescription' => 'required',
+            'picture' => 'image|nullable|max:1999'
         ]);
+
+        if($request->hasFile('picture')){
+            $filenameWithExt = $request->file('picture')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('picture')->getClientOriginalExtension();
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            $path = $request->file('picture')->storeAs('public/ProjectImages', $fileNameToStore);
+        } else {
+            $fileNameToStore = 'noimage.jpg';
+        }
 
         Project::where('id', $request->id)->update([
             'ProjectTitle' => $request->ProjectTitle,
-            'ProjectDescription' => $request->ProjectDescription
+            'ProjectDescription' => $request->ProjectDescription,
+            'picture' => $fileNameToStore
         ]);
 
-
-        
         return redirect('projects')->with('successUpdate','Data updated successfully');
     }
 
@@ -117,7 +148,10 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
         $project->delete();
+        File::delete(public_path() . '/public/posts_image/' . $project->picture);
         return redirect('projects')->with('successDelete','Data deleted successfully');
+
+        
     }
 
 

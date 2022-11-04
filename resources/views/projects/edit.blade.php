@@ -7,7 +7,7 @@
                 <div class='col-12'>
                     <h1 class='text-center'>Edit Project</h1>
                     <h3 >
-                        <form action={{route('projects.update', $project->id)}} method="POST">
+                        <form action={{route('projects.update', $project->id)}} method="POST" enctype="multipart/form-data">
                             @method('PUT')
                         {{ csrf_field() }}
                             <div class="form-group">
@@ -23,6 +23,10 @@
                                 @error('ProjectDescription')
                                     <div class="error alert alert-danger">{{ $message }}</div>
                                 @enderror
+                            </div>
+                            <div class='form-group'>
+                                <label for="image">Image</label>
+                                <input type="file" class="form-control-file custom-file-label" id="image" name="picture">
                             </div>
                             <input type='hidden' name="id" value={{$project->id}}>
                             <button type="submit" class="btn btn-primary">Submit</button>

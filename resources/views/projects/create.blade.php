@@ -7,7 +7,7 @@
                 <div class='col-12'>
                     <h1 class='text-center'>Create Project</h1>
                     <h3 >
-                        <form action={{route('projects.store')}} method="POST">
+                        <form action={{route('projects.store')}} method="POST" enctype="multipart/form-data" >
                         {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="title">Title</label>
@@ -16,6 +16,10 @@
                             <div class="form-group">
                                 <label for="description">Description</label>
                                 <textarea class="form-control" id="description" name="ProjectDescription" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="image">Image</label>
+                                <input type="file" class="form-control-file custom-file-label" id="image" name="ProjectImage">
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>

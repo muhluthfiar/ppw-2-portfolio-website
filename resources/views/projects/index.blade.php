@@ -11,6 +11,10 @@
                 <div class="alert alert-success">
                     {{ Session::get('successDelete') }}
                 </div>
+            @elseif(Session::has('successCreate'))
+                <div class="alert alert-success">
+                    {{ Session::get('successCreate') }}
+                </div>
 
             @endif
             <div class='row'>
@@ -21,6 +25,7 @@
                             <ul>
                                 @foreach ($projects as $project)
                                     <li>
+                                        <img src="{{asset('storage/ProjectImages/'.$project->picture)}}" height='50px'>
                                         <a href="/projects/{{ $project->id }}">{{ $project->ProjectTitle }}</a>
                                         <h6>Created At {{ $project -> created_at}}</h6>
                                     </li>
