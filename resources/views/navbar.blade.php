@@ -45,7 +45,11 @@
                     <li class='nav-item'>
                         <a class="nav-link text-light" aria-current="page" href="/projects">Projects</a>
                     </li>
-
+                    <li class="nav-item d-none d-sm-inline-block">
+                        <a class="nav-link text-light" href="{{ url('/gallery') }}">
+                        Gallery
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

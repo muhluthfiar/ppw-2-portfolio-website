@@ -14,6 +14,9 @@
         <link rel='stylesheet' href='../css/navbar.css'>
         <!-- Scripts -->
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+        <link rel="stylesheet" href="{{ asset('lightbox2/dist/css/lightbox.min.css') }}">
+        
     </head>
     <body>
     <nav class="navbar navbar-expand-lg bg-dark">
@@ -45,6 +48,11 @@
                     <li class='nav-item'>
                         <a class="nav-link text-light" aria-current="page" href="/projects">Projects</a>
                     </li>
+                    <li class="nav-item d-none d-sm-inline-block">
+                        <a class="nav-link text-light" href="{{ url('/gallery') }}">
+                        Gallery
+                        </a>
+                    </li>
 
                 </ul>
             </div>
@@ -53,5 +61,7 @@
 
         @yield('content')
         
+
+        <script src="{{ asset('lightbox2/dist/js/lightbox-plus-jquery.min.js')}}"></script>
     </body>
 </html>
