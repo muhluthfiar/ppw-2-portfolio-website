@@ -129,15 +129,12 @@ class GalleryController extends Controller
 
     public function getAllGallery(Request $request)
     {
-
-
         $data = array(
             'id' => "posts",
             'menu' => 'Gallery',
             'galleries' => array(Project::all()->where('picture', '!=', '')->whereNotNull('picture'))
         );
-
-        
+   
         return response()->json($data);
     }
 
