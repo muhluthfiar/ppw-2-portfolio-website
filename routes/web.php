@@ -66,6 +66,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/gallery2', function () {
     // fetcj data from api
     $response = Http::get('https://luthfi-ppw2.herokuapp.com/api/gallery');
-    $data = json_decode($response, false);
+    $data = json_decode($response, true);
     return view('gallery2')->with('data', $data);
 });
