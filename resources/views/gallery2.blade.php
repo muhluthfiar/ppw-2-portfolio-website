@@ -8,5 +8,6 @@
                    <img src="{{asset('storage/ProjectImages/'.$gallery->picture)}}" alt="" width="100%" height="100%"/>
                </a>
            </div>
+        @endforeach
     </div>
 @endsection
