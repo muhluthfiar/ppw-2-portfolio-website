@@ -2,6 +2,6 @@
 
 @section('content')
     <div class='allpictures'>
-       {{ $response }}
+       {{ $data }}
     </div>
 @endsection
