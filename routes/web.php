@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendEmail;
 use App\Http\Controllers\SendEmailController;
+use Illuminate\Support\Facades\Http;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,12 +18,11 @@ use App\Http\Controllers\SendEmailController;
 */
 
 
-
 Auth::routes([
     'reset' => false,
 ]);
 
-Route::get('/send-email',function(){
+Route::post('/send-email',function(){
     $data = [
     'name' => 'Nama Anda',
     'body' => 'Testing Kirim Email'
@@ -31,7 +31,7 @@ Route::get('/send-email',function(){
     dd("Email Berhasil dikirim.");
 });
 
-Route::get('/send-email', [SendEmailController::class, 'index'])->name('kirim-email');
+Route::post('/send-email', [SendEmailController::class, 'index'])->name('kirim-email');
 Route::post('/post-email', [SendEmailController::class, 'store'])->name('post-email');
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
