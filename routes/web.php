@@ -31,7 +31,7 @@ Route::post('/send-email',function(){
     dd("Email Berhasil dikirim.");
 });
 
-Route::post('/send-email', [SendEmailController::class, 'index'])->name('kirim-email');
+Route::get('/send-email', [SendEmailController::class, 'index'])->name('kirim-email');
 Route::post('/post-email', [SendEmailController::class, 'store'])->name('post-email');
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
