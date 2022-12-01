@@ -64,5 +64,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/gallery2', function () {
-    return view('gallery2');
+    // fetcj data from api
+    $response = Http::get('/api/gallery');
+    return view('gallery2')->with('data', $response->json());
 });
