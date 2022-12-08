@@ -7,9 +7,8 @@
       "assets/app.5380b351.css"
     ]
   },
-  "resources/sass/app.scss": {
+  "resources/js/app.css": {
     "file": "assets/app.5380b351.css",
-    "src": "resources/sass/app.scss",
-    "isEntry": true
+    "src": "resources/js/app.css"
   }
 }
